@@ -1,6 +1,6 @@
 {
   "name": "@simplyhexagonal/mono-context",
-  "version": "1.0.0",
+  "version": "0.9.0",
   "description": "Global context to easily share data between monorepo packages",
   "private": false,
   "main": "dist/mono-context.js",
