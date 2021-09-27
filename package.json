@@ -1,0 +1,57 @@
+{
+  "name": "@simplyhexagonal/mono-context",
+  "version": "1.0.0",
+  "description": "Global context to easily share data between monorepo packages",
+  "private": false,
+  "main": "dist/mono-context.js",
+  "types": "dist/mono-context.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/simplyhexagonal/mono-context"
+  },
+  "contributors": [
+    {
+      "name": "Jean M. Lescure",
+      "email": "opensource@jeanlescure.io",
+      "url": "http://jeanlescure.io/"
+    }
+  ],
+  "license": "Apache-2.0",
+  "scripts": {
+    "test": "jest",
+    "build": "scripty",
+    "release": "release-it"
+  },
+  "release-it": {
+    "git": {
+      "changelog": "auto-changelog --stdout -l false -u -t ./assets/changelog-compact.hbs"
+    },
+    "hooks": {
+      "after:bump": "scripty"
+    },
+    "npm": {
+      "publish": false
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "package.json"
+  ],
+  "runkitExampleFilename": "./runkit.js",
+  "devDependencies": {
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.9.2",
+    "auto-changelog": "^2.3.0",
+    "esbuild": "^0.12.28",
+    "jest": "^27.2.0",
+    "refup": "^1.1.0",
+    "release-it": "^14.11.5",
+    "scripty": "^2.0.0",
+    "ts-jest": "^27.0.5",
+    "ts-node": "^10.2.1",
+    "ts-node-dev": "^1.1.8",
+    "tslib": "^2.3.1",
+    "typescript": "^4.4.3"
+  }
+}
