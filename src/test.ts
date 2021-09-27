@@ -4,7 +4,9 @@ interface TestState extends MonoContextState {
   hello: string;
 }
 
-const testData = {hello: 'world'};
+const testData = {
+  hello: 'world'
+};
 
 describe('MonoContext class', () => {
   it('can get the current state', () => {
