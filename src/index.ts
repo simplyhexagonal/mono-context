@@ -1,3 +1,9 @@
+// @ts-ignore
+import { version } from '../package.json';
+
+// @ts-ignore
+export { version } from '../package.json';
+
 export interface MonoContextState {
   counts: {[k: string]: number},
   stateCreatedAt: Date,
@@ -13,8 +19,9 @@ export default class MonoContext {
   private static _counts: {[k: string]: number} = {};
   private static _state: {[k: string]: any} = {};
 
+  static version = version;
+
   static _warningMessage = 'WARNING: refusing to override "PROPERTY" property in MonoContext state';
-  
 
   static count = (key: string): number => {
     if (!MonoContext._counts[key]) {
