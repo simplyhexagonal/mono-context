@@ -99,15 +99,32 @@ describe('MonoContext class', () => {
     expect(MonoContext.getCount('resetMe')).toBe(0);
 
     MonoContext.count('resetMe');
+    MonoContext.count('resetMeAfter');
 
     MonoContext.resetState();
 
     expect(MonoContext.getStateValue('reset')).toBeUndefined();
     expect(MonoContext.getCount('resetMe')).toBe(1);
 
-    MonoContext.resetCount();
+    MonoContext.resetCount('resetMe');
+
     expect(MonoContext.getStateValue('reset')).toBeUndefined();
     expect(MonoContext.getCount('resetMe')).toBe(0);
+    expect(MonoContext.getCount('resetMeAfter')).toBe(1);
+  
+    MonoContext.setState({
+      setMe: 'again',
+    });
+
+    expect(MonoContext.getStateValue('setMe')).toBe('again');
+    expect(MonoContext.getCount('resetMe')).toBe(0);
+    expect(MonoContext.getCount('resetMeAfter')).toBe(1);
+
+    MonoContext.resetAllCounts();
+
+    expect(MonoContext.getStateValue('setMe')).toBe('again');
+    expect(MonoContext.getCount('resetMe')).toBe(0);
+    expect(MonoContext.getCount('resetMeAfter')).toBe(0);
   });
 
   it('refuses to override reserved keys in the state and warns about it', () => {

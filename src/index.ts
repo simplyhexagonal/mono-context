@@ -28,7 +28,13 @@ export default class MonoContext {
 
   static getCount = (key: string): number => MonoContext._counts[key] || 0;
 
-  static resetCount = () => {
+  static resetCount = (key: string) => {
+    if (MonoContext._counts[key]) {
+      MonoContext._counts[key] = 0;
+    }
+  }
+
+  static resetAllCounts = () => {
     MonoContext._counts = {};
   }
 
@@ -84,6 +90,7 @@ export default class MonoContext {
   count = MonoContext.count;
   getCount = MonoContext.getCount;
   resetCount = MonoContext.resetCount;
+  resetAllCounts = MonoContext.resetAllCounts;
   setState = MonoContext.setState;
   getState = MonoContext.getState;
   getStateValue = MonoContext.getStateValue;

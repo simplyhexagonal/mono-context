@@ -199,7 +199,9 @@ Then, simply call `MonoContext`'s static functions:
 
 ```ts
 MonoContext.count('myCount');
-MonoContext.getCount('myCount');
+MonoContext.count('myOtherCount');
+
+MonoContext.getCount('myCount'); // 1
 
 MonoContext.setState({
   some: 'data',
@@ -208,10 +210,15 @@ MonoContext.setState({
   }
 });
 
+MonoContext.getStateValue('some'); // data
+
 const {
-  some,
   that,
-} = MonoContext.getState();
+} = MonoContext.getState(); // that == { is: 'useful' }
+
+MonoContext.resetState();
+MonoContext.resetCount('myOtherCount');
+MonoContext.resetAllCounts();
 ```
 
 ## Type-safe states
