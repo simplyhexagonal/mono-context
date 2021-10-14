@@ -11,10 +11,10 @@ export default class MonoContext {
   private static _stateCreatedAt: Date = new Date();
   private static _stateUpdatedAt: Date = new Date();
   private static _counts: {[k: string]: number} = {};
+  private static _state: {[k: string]: any} = {};
 
   static _warningMessage = 'WARNING: refusing to override "PROPERTY" property in MonoContext state';
   
-  static _state: {[k: string]: any} = {};
 
   static count = (key: string): number => {
     if (!MonoContext._counts[key]) {
@@ -27,6 +27,10 @@ export default class MonoContext {
   };
 
   static getCount = (key: string): number => MonoContext._counts[key] || 0;
+
+  static resetCount = () => {
+    MonoContext._counts = {};
+  }
 
   static setState = <T extends MonoContextState>(newState: Partial<T>) => {
     if (Object.keys(newState).includes('stateCreatedAt')) {
@@ -69,10 +73,21 @@ export default class MonoContext {
     } as T;
   };
 
+  static getStateValue = (key: string) => MonoContext._state[key];
+
+  static resetState = () => {
+    MonoContext._stateCreatedAt = new Date();
+    MonoContext._stateUpdatedAt = new Date();
+    MonoContext._state = {};
+  }
+
   count = MonoContext.count;
+  getCount = MonoContext.getCount;
+  resetCount = MonoContext.resetCount;
   setState = MonoContext.setState;
   getState = MonoContext.getState;
-  getCount = MonoContext.getCount;
+  getStateValue = MonoContext.getStateValue;
+  resetState = MonoContext.resetState;
 
   constructor(warningOff: boolean = false) {
     if (!warningOff) {

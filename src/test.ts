@@ -31,6 +31,7 @@ describe('MonoContext class', () => {
     expect(Object.keys(setStateState).includes('hello')).toBe(true);
     expect(Object.keys(postState).includes('hello')).toBe(true);
     expect(postState.hello).toBe('world');
+    expect(MonoContext.getStateValue('hello')).toBe('world');
   });
 
   it('can update existing values on the state', () => {
@@ -87,6 +88,26 @@ describe('MonoContext class', () => {
     expect(updatedAtValue - createdAtValue).toBeGreaterThan(1);
 
     expect(updatedAtValue - createdAtValue).toBeLessThan(1000);
+  });
+
+  it('can reset state and counts', () => {
+    MonoContext.setState({
+      reset: 'me',
+    });
+
+    expect(MonoContext.getStateValue('reset')).toBe('me');
+    expect(MonoContext.getCount('resetMe')).toBe(0);
+
+    MonoContext.count('resetMe');
+
+    MonoContext.resetState();
+
+    expect(MonoContext.getStateValue('reset')).toBeUndefined();
+    expect(MonoContext.getCount('resetMe')).toBe(1);
+
+    MonoContext.resetCount();
+    expect(MonoContext.getStateValue('reset')).toBeUndefined();
+    expect(MonoContext.getCount('resetMe')).toBe(0);
   });
 
   it('refuses to override reserved keys in the state and warns about it', () => {
