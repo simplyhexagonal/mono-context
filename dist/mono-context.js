@@ -40,14 +40,24 @@ var MonoContext = (() => {
   // src/index.ts
   var src_exports = {};
   __export(src_exports, {
-    default: () => MonoContext
+    default: () => MonoContext,
+    version: () => version
   });
+
+  // package.json
+  var version = "1.1.0";
+
+  // src/index.ts
   var _MonoContext = class {
     constructor(warningOff = false) {
       this.count = _MonoContext.count;
+      this.getCount = _MonoContext.getCount;
+      this.resetCount = _MonoContext.resetCount;
+      this.resetAllCounts = _MonoContext.resetAllCounts;
       this.setState = _MonoContext.setState;
       this.getState = _MonoContext.getState;
-      this.getCount = _MonoContext.getCount;
+      this.getStateValue = _MonoContext.getStateValue;
+      this.resetState = _MonoContext.resetState;
       if (!warningOff) {
         console.log("WARNING: instantiating MonoContext is unnecessary, all methods are statically defined");
       }
@@ -62,8 +72,9 @@ var MonoContext = (() => {
   MonoContext._stateCreatedAt = new Date();
   MonoContext._stateUpdatedAt = new Date();
   MonoContext._counts = {};
-  MonoContext._warningMessage = 'WARNING: refusing to override "PROPERTY" property in MonoContext state';
   MonoContext._state = {};
+  MonoContext.version = version;
+  MonoContext._warningMessage = 'WARNING: refusing to override "PROPERTY" property in MonoContext state';
   MonoContext.count = (key) => {
     if (!_MonoContext._counts[key]) {
       _MonoContext._counts[key] = 0;
@@ -72,6 +83,14 @@ var MonoContext = (() => {
     return _MonoContext._counts[key];
   };
   MonoContext.getCount = (key) => _MonoContext._counts[key] || 0;
+  MonoContext.resetCount = (key) => {
+    if (_MonoContext._counts[key]) {
+      _MonoContext._counts[key] = 0;
+    }
+  };
+  MonoContext.resetAllCounts = () => {
+    _MonoContext._counts = {};
+  };
   MonoContext.setState = (newState) => {
     if (Object.keys(newState).includes("stateCreatedAt")) {
       console.log(_MonoContext._warningMessage.replace("PROPERTY", "stateCreatedAt"));
@@ -103,6 +122,12 @@ var MonoContext = (() => {
       stateCreatedAt: _MonoContext._stateCreatedAt,
       stateUpdatedAt: _MonoContext._stateUpdatedAt
     });
+  };
+  MonoContext.getStateValue = (key) => _MonoContext._state[key];
+  MonoContext.resetState = () => {
+    _MonoContext._stateCreatedAt = new Date();
+    _MonoContext._stateUpdatedAt = new Date();
+    _MonoContext._state = {};
   };
   return src_exports;
 })();

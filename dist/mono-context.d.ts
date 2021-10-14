@@ -1,3 +1,4 @@
+export { version } from '../package.json';
 export interface MonoContextState {
     counts: {
         [k: string]: number;
@@ -11,17 +12,24 @@ export default class MonoContext {
     private static _stateCreatedAt;
     private static _stateUpdatedAt;
     private static _counts;
+    private static _state;
+    static version: string;
     static _warningMessage: string;
-    static _state: {
-        [k: string]: any;
-    };
     static count: (key: string) => number;
     static getCount: (key: string) => number;
+    static resetCount: (key: string) => void;
+    static resetAllCounts: () => void;
     static setState: <T extends MonoContextState>(newState: Partial<T>) => MonoContextState;
     static getState: <T extends MonoContextState>() => T;
+    static getStateValue: (key: string) => any;
+    static resetState: () => void;
     count: (key: string) => number;
+    getCount: (key: string) => number;
+    resetCount: (key: string) => void;
+    resetAllCounts: () => void;
     setState: <T extends MonoContextState>(newState: Partial<T>) => MonoContextState;
     getState: <T extends MonoContextState>() => T;
-    getCount: (key: string) => number;
+    getStateValue: (key: string) => any;
+    resetState: () => void;
     constructor(warningOff?: boolean);
 }
