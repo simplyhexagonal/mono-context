@@ -186,10 +186,10 @@ Import `MonoContext`:
 
 ```tsx
 // Node
-const MockContext = require('@simplyhexagonal/mono-context');
+const MonoContext = require('@simplyhexagonal/mono-context');
 
 // ES6/Typescript
-import MockContext from '@simplyhexagonal/mono-context';
+import MonoContext from '@simplyhexagonal/mono-context';
 
 // Browser (i.e. useful to debug components within React)
 <script src="https://cdn.jsdelivr.net/npm/@simplyhexagonal/mono-context@latest/dist/mono-context.min.js"></script>
