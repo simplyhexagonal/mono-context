@@ -45,7 +45,7 @@ var MonoContext = (() => {
   });
 
   // package.json
-  var version = "1.1.0";
+  var version = "1.1.1";
 
   // src/index.ts
   var _MonoContext = class {
