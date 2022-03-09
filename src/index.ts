@@ -20,6 +20,7 @@ export default class MonoContext {
   private static _state: {[k: string]: any} = {};
 
   static version = version;
+  static default: typeof MonoContext = MonoContext;
 
   static _warningMessage = 'WARNING: refusing to override "PROPERTY" property in MonoContext state';
 
