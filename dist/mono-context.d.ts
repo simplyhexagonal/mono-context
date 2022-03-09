@@ -14,6 +14,7 @@ export default class MonoContext {
     private static _counts;
     private static _state;
     static version: string;
+    static default: typeof MonoContext;
     static _warningMessage: string;
     static count: (key: string) => number;
     static getCount: (key: string) => number;

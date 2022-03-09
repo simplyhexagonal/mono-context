@@ -45,7 +45,7 @@ var MonoContext = (() => {
   });
 
   // package.json
-  var version = "1.1.1";
+  var version = "1.1.2";
 
   // src/index.ts
   var _MonoContext = class {
@@ -74,6 +74,7 @@ var MonoContext = (() => {
   MonoContext._counts = {};
   MonoContext._state = {};
   MonoContext.version = version;
+  MonoContext.default = _MonoContext;
   MonoContext._warningMessage = 'WARNING: refusing to override "PROPERTY" property in MonoContext state';
   MonoContext.count = (key) => {
     if (!_MonoContext._counts[key]) {
